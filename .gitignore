@@ -1,0 +1,6 @@
+.autoenv.zsh
+.envrc
+node_modules/
+.terraform/
+tmp/*.plan
+**/*.tfvars
