@@ -21,7 +21,7 @@ variable "desired_count" {
   default = 2
 }
 
-variable "internal" {
+variable "internal_elb" {
   description = "use an internal load balancer or an internet-facing one"
   default = true
 }
@@ -55,7 +55,7 @@ module "elb" {
   healthcheck = "${var.healthcheck}"
   host_name = "${var.host_name}"
   dns_zone_id = "${var.dns_zone_id}"
-  internal = "${var.internal}"
+  internal = "${var.internal_elb}"
 }
 
 resource "aws_ecs_service" "microservice" {
