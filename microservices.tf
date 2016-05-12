@@ -21,6 +21,16 @@ variable "desired_count" {
   default = 2
 }
 
+variable "deployment_maximum_percent" {
+  description = "The upper limit (as a percentage of the service's desiredCount) of the number of running tasks that can be running in a service during a deployment."
+  default = 200
+}
+
+variable "deployment_minimum_healthy_percent" {
+  descripption = "The lower limit (as a percentage of the service's desiredCount) of the number of running tasks that must remain running and healthy in a service during a deployment."
+  default = 100
+}
+
 variable "internal_elb" {
   description = "use an internal load balancer or an internet-facing one"
   default = true
@@ -63,6 +73,8 @@ resource "aws_ecs_service" "microservice" {
   cluster = "${var.cluster_id}"
   task_definition = "${var.task_definition}"
   desired_count = "${var.desired_count}"
+  deployment_minimum_healthy_percent = "${var.deployment_minimum_healthy_percent}"
+  deployment_maximum_percent = "${var.deployment_maximum_percent}"
   iam_role = "${var.iam_role}"
 
   load_balancer {
